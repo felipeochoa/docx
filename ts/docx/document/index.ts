@@ -2,6 +2,7 @@ import {XmlComponent} from "../xml-components";
 import {DocumentAttributes} from "./document-attributes";
 import {Body} from "./body";
 import {Paragraph} from "../paragraph";
+import {Table} from "../table";
 
 export class Document extends XmlComponent {
     private body: Body;
@@ -33,6 +34,10 @@ export class Document extends XmlComponent {
 
     addParagraph(paragraph: Paragraph): void {
         this.body.push(paragraph);
+    }
+
+    addTable(table: Table): void {
+        this.body.push(table);
     }
 
     clearVariables(): void {

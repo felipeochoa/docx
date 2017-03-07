@@ -12,4 +12,14 @@ export class Body extends XmlComponent {
         // this.root.splice(this.body.length - 1, 0, component);
         this.root.push(component);
     }
+
+    clearVariables() {
+        if (this.root !== undefined) {
+            this.root.forEach(root => {
+                if (root && root instanceof XmlComponent) {
+                    root.clearVariables();
+                }
+            });
+        }
+    }
 }
