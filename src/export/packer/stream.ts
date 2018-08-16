@@ -1,14 +1,7 @@
-import { Readable, Transform } from "stream";
+import { PassThrough, Readable } from "stream";
 import { File } from "../../file";
 import { Compiler } from "./compiler";
 import { IPacker } from "./packer";
-
-class Pipe extends Transform {
-    public _transform(chunk: Buffer | string, encoding: string, callback: () => void): void {
-        this.push(chunk, encoding);
-        callback();
-    }
-}
 
 export class StreamPacker implements IPacker {
     private readonly compiler: Compiler;
@@ -18,7 +11,7 @@ export class StreamPacker implements IPacker {
     }
 
     public pack(): Readable {
-        const pipe = new Pipe();
+        const pipe = new PassThrough();
         this.compiler.compile(pipe);
         return pipe;
     }
